@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+html {
+    --aura-font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.app-logo {
+    border-radius: min(40%, var(--vaadin-radius-m));
+    margin-inline-start: var(--vaadin-padding-inline-container);
+}
+
+.app-name {
+    font-weight: var(--aura-font-weight-semibold);
+    font-size: var(--aura-font-size-l);
+}
+
+.app-footer {
+    color: var(--vaadin-text-color-secondary);
+    font-size: var(--aura-font-size-s);
+}
