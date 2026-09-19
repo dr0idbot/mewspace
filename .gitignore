@@ -20,3 +20,6 @@ Dockerfile
 LICENSE.md
 README.md
 classpath.txt
+
+misc/
+opencode.json
