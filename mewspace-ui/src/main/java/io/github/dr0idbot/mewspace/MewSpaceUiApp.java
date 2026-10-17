@@ -9,7 +9,6 @@ import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.theme.aura.Aura;
 
 @SpringBootApplication
-@StyleSheet(Aura.STYLESHEET)
 @StyleSheet("styles.css")
 @Push
 public class MewSpaceUiApp implements AppShellConfigurator {
