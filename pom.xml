@@ -10,11 +10,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>v-space-backend</module>
-		<module>v-space-components</module>
-		<module>v-space-views</module>
-		<module>v-space-aura</module>
-		<module>v-space-lumo</module>
+		<module>mewspace-backend</module>
+		<module>mewspace-components</module>
+		<module>mewspace-views</module>
+		<module>mewspace-ui</module>
 	</modules>
 
 	<properties>
