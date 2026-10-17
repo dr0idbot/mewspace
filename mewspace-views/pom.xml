@@ -19,5 +19,10 @@
 			<artifactId>mewspace-components</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.github.dr0idbot</groupId>
+			<artifactId>mewspace-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
