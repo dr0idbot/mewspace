@@ -1,4 +1,4 @@
-package io.github.dr0idbot.mewspace.views.sample;
+package io.github.dr0idbot.mewspace.views;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
