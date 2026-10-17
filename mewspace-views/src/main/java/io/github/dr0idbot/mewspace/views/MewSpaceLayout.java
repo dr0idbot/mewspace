@@ -16,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.Layout;
+import com.vaadin.flow.server.Version;
 import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 
@@ -54,7 +55,7 @@ public final class MewSpaceLayout extends AppLayout {
 	private Component createApplicationFooter() {
 		var themeControl = new MewSpaceThemeControl();
 
-		var footer = new VerticalLayout(themeControl);
+		var footer = new VerticalLayout(themeControl, new Span("Vaadin - v" + Version.getFullVersion()));
 		footer.setAlignItems(FlexComponent.Alignment.CENTER);
 		footer.addClassName(MewSpaceCSSConst.APP_FOOTER);
 		return footer;
