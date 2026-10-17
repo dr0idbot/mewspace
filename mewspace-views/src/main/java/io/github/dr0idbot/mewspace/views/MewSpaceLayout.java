@@ -52,7 +52,9 @@ public final class MewSpaceLayout extends AppLayout {
 	}
 
 	private Component createApplicationFooter() {
-		var footer = new VerticalLayout(new Span("Made with \u2764\uFE0F with Vaadin"));
+		var themeControl = new MewSpaceThemeControl();
+
+		var footer = new VerticalLayout(themeControl);
 		footer.setAlignItems(FlexComponent.Alignment.CENTER);
 		footer.addClassName(MewSpaceCSSConst.APP_FOOTER);
 		return footer;
