@@ -18,3 +18,20 @@ html {
     color: var(--vaadin-text-color-secondary);
     font-size: var(--aura-font-size-s);
 }
+
+.UIDialog {
+    width: 40em;
+    max-width: 90%;
+}
+
+.UIDialog .showMessage {
+    margin-bottom: var(--aura-space-s, 0.5em);
+}
+
+.UIDialog .showTrace {
+    max-height: 16em;
+    overflow: auto;
+    white-space: pre;
+    font-family: monospace;
+    font-size: var(--aura-font-size-xs, 0.75em);
+}

@@ -25,6 +25,8 @@
 
 		<vaadin.version>25.2.8</vaadin.version>
 		<spring-boot.version>4.1.1</spring-boot.version>
+
+		<v-lucide-icons.version>1.41.0</v-lucide-icons.version>
 	</properties>
 
 	<dependencyManagement>
@@ -42,6 +44,11 @@
 				<version>${vaadin.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.github.dr0idbot</groupId>
+				<artifactId>v-lucide-icons</artifactId>
+				<version>${v-lucide-icons.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
