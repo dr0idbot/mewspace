@@ -2,6 +2,7 @@ package io.github.dr0idbot.mewspace.apiclient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
@@ -48,6 +49,43 @@ public abstract class BaseApiClient {
 					.retrieve()
 					.body(responseType);
 			log.debug("GET {} connected, response type: {}", endpoint, responseType.getSimpleName());
+			return result;
+		} catch (RestClientResponseException e) {
+			throw new MewSpaceRestClientException("GET " + endpoint + " failed: " + e.getStatusCode(), e);
+		} catch (Exception e) {
+			throw new MewSpaceRestClientException("GET " + endpoint + " failed: " + e.getMessage(), e);
+		}
+	}
+
+	protected <T> T get(String endpoint, ParameterizedTypeReference<T> responseType,
+			MultiValueMap<String, String> queryParams) throws MewSpaceRestClientException {
+		log.debug("GET {}?{} -> {}", endpoint, queryParams, responseType.getType());
+		try {
+			T result = restClient.get()
+					.uri(uriBuilder -> UriComponentsBuilder.fromPath(endpoint)
+							.queryParams(queryParams)
+							.build()
+							.toUri())
+					.retrieve()
+					.body(responseType);
+			log.debug("GET {} connected, response type: {}", endpoint, responseType.getType());
+			return result;
+		} catch (RestClientResponseException e) {
+			throw new MewSpaceRestClientException("GET " + endpoint + " failed: " + e.getStatusCode(), e);
+		} catch (Exception e) {
+			throw new MewSpaceRestClientException("GET " + endpoint + " failed: " + e.getMessage(), e);
+		}
+	}
+
+	protected <T> T get(String endpoint, ParameterizedTypeReference<T> responseType, Object... uriVariables)
+			throws MewSpaceRestClientException {
+		log.debug("GET {} -> {} with vars {}", endpoint, responseType.getType(), uriVariables);
+		try {
+			T result = restClient.get()
+					.uri(endpoint, uriVariables)
+					.retrieve()
+					.body(responseType);
+			log.debug("GET {} connected, response type: {}", endpoint, responseType.getType());
 			return result;
 		} catch (RestClientResponseException e) {
 			throw new MewSpaceRestClientException("GET " + endpoint + " failed: " + e.getStatusCode(), e);
