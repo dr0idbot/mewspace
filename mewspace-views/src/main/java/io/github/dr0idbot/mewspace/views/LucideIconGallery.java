@@ -35,7 +35,7 @@ public class LucideIconGallery extends VerticalLayout {
 	private static final String COLOR_DEFAULT = "Default";
 	private static final double DEFAULT_FONT_SIZE = 40.0;
 	private static final double DEFAULT_STROKE_WIDTH = 1.0;
-	private static final int PAGE_SIZE = 1600;
+	private static final int ICONS_PER_PAGE = 120;
 
 	private static final List<Double> STROKE_WIDTHS = List.of(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0);
 	private static final List<String> LINE_CAP_CHOICES = List.of(COLOR_DEFAULT, "butt", "round", "square");
@@ -173,8 +173,8 @@ public class LucideIconGallery extends VerticalLayout {
 	private void renderPage() {
 		gallery.removeAll();
 		icons.clear();
-		var start = pageIndex * PAGE_SIZE;
-		var end = Math.min(start + PAGE_SIZE, filteredIcons.size());
+		var start = pageIndex * ICONS_PER_PAGE;
+		var end = Math.min(start + ICONS_PER_PAGE, filteredIcons.size());
 		for (int i = start; i < end; i++) {
 			var lucideIcon = filteredIcons.get(i);
 			var icon = createIcon(lucideIcon);
@@ -204,7 +204,7 @@ public class LucideIconGallery extends VerticalLayout {
 	}
 
 	private int pageCount() {
-		return Math.max(1, (int) Math.ceil(filteredIcons.size() / (double) PAGE_SIZE));
+		return Math.max(1, (int) Math.ceil(filteredIcons.size() / (double) ICONS_PER_PAGE));
 	}
 
 	private Button createPageButton(LucideIcon lucideIcon, String label, Command action) {
