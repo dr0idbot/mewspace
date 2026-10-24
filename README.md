@@ -1,4 +1,4 @@
-# vaadin-space / mewspace
+# mewspace
 
 A multi-module Maven application built with **Java 25**, **Vaadin 25 (pure Flow, no Hilla)** and
 **Spring Boot 4.1.1** — currently serving as a countries explorer plus in-app UI playground
@@ -21,7 +21,7 @@ A multi-module Maven application built with **Java 25**, **Vaadin 25 (pure Flow,
 ## Modules
 
 ```
-vaadin-space/                     parent pom (no parent of its own)
+mewspace/                      parent pom (no parent of its own)
 ├── mewspace-backend/              server side jar: RestClient layer (BaseApiClient, countries
 │                                  client + models) + CountriesService and UIException
 ├── mewspace-views/                shared views (countries grid, theme control, icon gallery)
