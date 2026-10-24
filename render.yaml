@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: mewspace-ui
+    name: mewspace
     runtime: docker
     dockerfilePath: ./Dockerfile
     dockerContext: ./
