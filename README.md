@@ -22,15 +22,16 @@ A multi-module Maven application built with **Java 25**, **Vaadin 25 (pure Flow,
 
 ```
 vaadin-space/                     parent pom (no parent of its own)
-├── mewspace-backend/
-│   ├── mewspace-apiclient/       RestClient layer (BaseApiClient, countries client + models)
-│   └── mewspace-service/         CountriesService + UIException handling for the UI
-├── mewspace-components/          shared Vaadin components (UIDialog)
-├── mewspace-views/               shared views (countries grid, theme control, icon gallery)
-└── mewspace-ui/                  the runnable Spring Boot app, port 8080
+├── mewspace-backend/              server side jar: RestClient layer (BaseApiClient, countries
+│                                  client + models) + CountriesService and UIException
+├── mewspace-views/                shared views (countries grid, theme control, icon gallery)
+│                                  and components (UIDialog; the mewspace.components package)
+└── mewspace-ui/                   the runnable Spring Boot app, port 8080
 ```
 
-Dependency direction: `ui → views → {components, service} → apiclient`.
+Dependency direction: `ui → views → backend`. Package-level layering is unchanged
+(`apiclient` and `service` packages live in one jar; `components` package lives next to
+`views`). See `RENDER.md` for Docker/Render deployment.
 
 ## Requirements
 
