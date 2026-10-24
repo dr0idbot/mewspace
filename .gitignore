@@ -1,6 +1,7 @@
 /target/
 **/target/
 **/src/main/frontend/generated/
+**/src/main/bundles/
 vite.generated.ts
 node_modules/
 
@@ -18,8 +19,9 @@ mvnw.cmd
 *.class
 Dockerfile
 LICENSE.md
-README.md
 classpath.txt
+BaseStyleRef.html
+BaseStyleRef_files/
 
 misc/
 references/
