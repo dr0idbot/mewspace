@@ -10,13 +10,14 @@ A multi-module Maven application built with **Java 25**, **Vaadin 25 (pure Flow,
   as a sortable, resizable, frozen-name grid backed by a REST client + service layer with
   friendly error dialogs (`UIDialog`).
 - **Runtime theme control** — switch between **Aura**, **Lumo** and **Base** styles plus a
-  light/dark color-scheme toggle. Defaults to **Aura dark** via
-  `Page.addStyleSheet(Aura.STYLESHEET)` + `Page.setColorScheme(DARK)` on attach (the official
+  light/dark color-scheme toggle. Defaults to **Aura light** via
+  `Page.addStyleSheet(Aura.STYLESHEET)` + `Page.setColorScheme(LIGHT)` on attach (the official
   Vaadin 25 runtime-theming pattern); logs under the `[THEME-CONTROL]` prefix.
 - **Lucide icon gallery** (`/lucide-icons`) — browse all 2 000+ icons from the
   `io.github.dr0idbot:v-lucide-icons` add-on with font-size, stroke width,
-  color, fill, line cap/join controls, substring filter and pagination. Tiles are styled purely
-  with CSS (CSS grid) using Vaadin base-style tokens; icon names appear as tooltips only.
+  color, fill, line cap/join controls, reset, substring filter and responsive pagination that
+  sizes each page to the available viewport. Tiles are styled purely with CSS (CSS grid) using
+  Vaadin base-style tokens; icon names appear as tooltips only.
 
 ## Modules
 
@@ -55,7 +56,4 @@ Properties live in `mewspace-ui/src/main/resources/application.properties`:
 `mewspace.api.client.*` (client timeouts), `mewspace.api.countries.base-url`
 (default `https://countries.dev`).
 
-## Project docs
-
-- `AGENTS.md` — agent handbook (module layout, conventions, quirks)
-- `references/REFERENCE.md` — Vaadin base style CSS custom properties (`--vaadin-*`)
+See `RENDER.md` for Docker/Render deployment.
