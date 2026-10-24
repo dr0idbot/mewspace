@@ -31,6 +31,8 @@ html {
     grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
     gap: var(--vaadin-gap-m);
     width: 100%;
+    min-height: 100%;
+    align-content: center;
 }
 
 .lucide-icon-item {
