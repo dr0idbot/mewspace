@@ -59,4 +59,3 @@ Properties live in `mewspace-ui/src/main/resources/application.properties`:
 
 - `AGENTS.md` — agent handbook (module layout, conventions, quirks)
 - `references/REFERENCE.md` — Vaadin base style CSS custom properties (`--vaadin-*`)
-- `HANDOVER.md` / `COMPACTION.md` — AI session handover and compaction notes
