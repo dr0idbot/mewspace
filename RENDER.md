@@ -22,7 +22,7 @@ edge proxy (correct `https://` URLs and working push/websockets).
 ## Steps — Dashboard
 
 1. New → **Web Service** → connect the GitHub repo.
-2. **Branch**: `dev` (working branch).
+2. **Branch**: `main`.
 3. **Runtime**: **Docker**; Dockerfile path `./Dockerfile`; Docker context `./`
    (the root must be the context — the reactor needs the parent POM and all modules).
 4. **Plan**: Free works for demos (512 MB; spins down after ~15 min idle, cold start is
@@ -40,7 +40,7 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     dockerContext: ./
-    branch: dev
+    branch: main
     healthCheckPath: /
     plan: free
     autoDeploy: true
