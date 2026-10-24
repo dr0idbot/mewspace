@@ -15,14 +15,17 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.github.dr0idbot.mewspace.components</groupId>
-			<artifactId>mewspace-components</artifactId>
+			<groupId>io.github.dr0idbot</groupId>
+			<artifactId>mewspace-backend</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>io.github.dr0idbot</groupId>
-			<artifactId>mewspace-service</artifactId>
-			<version>${project.version}</version>
+			<artifactId>v-lucide-icons</artifactId>
 		</dependency>
 	</dependencies>
 </project>
