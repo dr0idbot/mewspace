@@ -1,0 +1,13 @@
+.git/
+**/target/
+**/.settings/
+**/.project
+**/.classpath
+**/node_modules/
+**/src/main/frontend/generated/
+**/src/main/bundles/
+misc/
+references/
+BaseStyleRef.html
+BaseStyleRef_files/
+opencode.json
