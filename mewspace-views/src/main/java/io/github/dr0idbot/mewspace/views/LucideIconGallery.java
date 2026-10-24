@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
@@ -37,7 +38,7 @@ public class LucideIconGallery extends VerticalLayout {
 	private static final double DEFAULT_FONT_SIZE = 60.0;
 	private static final double DEFAULT_STROKE_WIDTH = 1.5;
 
-	private static final int ICONS_PER_PAGE = 160;
+	private static final int INITIAL_PAGE_SIZE = 24;
 
 	private static final List<Double> STROKE_WIDTHS = List.of(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0);
 	private static final List<String> LINE_CAP_CHOICES = List.of(COLOR_DEFAULT, "butt", "round", "square");
@@ -54,6 +55,7 @@ public class LucideIconGallery extends VerticalLayout {
 	private String lineCap = COLOR_DEFAULT;
 	private String lineJoin = COLOR_DEFAULT;
 	private int pageIndex;
+	private int pageSize = INITIAL_PAGE_SIZE;
 
 	private final List<LucideIcon> filteredIcons = new ArrayList<>();
 	private final List<LucideSvgIcon> icons = new ArrayList<>();
@@ -178,6 +180,65 @@ public class LucideIconGallery extends VerticalLayout {
 		setHeightFull();
 		setFlexGrow(1, scroller);
 		add(controls, scroller, pagination);
+
+		addAttachListener(e -> setupPageSizeObserver(scroller));
+		addDetachListener(e -> getElement().executeJs("""
+				if (this.__galleryObserver) {
+					this.__galleryObserver.disconnect();
+					this.__galleryObserver = null;
+				}
+				clearTimeout(this.__galleryMeasureTimer);
+				this.__galleryMeasure = null;
+				"""));
+	}
+
+	private void setupPageSizeObserver(Scroller scroller) {
+		getElement().executeJs("""
+				const scroller = $0;
+				const gallery = $1;
+				const host = this;
+				const measure = () => {
+					clearTimeout(host.__galleryMeasureTimer);
+					host.__galleryMeasureTimer = setTimeout(() => {
+						const item = gallery.querySelector('.lucide-icon-item');
+						if (!item) {
+							return;
+						}
+						const style = getComputedStyle(gallery);
+						const columnGap = parseFloat(style.columnGap) || 0;
+						const rowGap = parseFloat(style.rowGap) || 0;
+						const itemRect = item.getBoundingClientRect();
+						if (itemRect.width === 0 || itemRect.height === 0 || scroller.clientHeight === 0) {
+							return;
+						}
+						const columns = Math.max(1,
+								Math.floor((gallery.clientWidth + columnGap) / (itemRect.width + columnGap)));
+						const rows = Math.max(1,
+								Math.floor((scroller.clientHeight + rowGap - 1) / (itemRect.height + rowGap)));
+						host.$server.updatePageSize(columns, rows);
+					}, 100);
+				};
+				host.__galleryMeasure = measure;
+				if (host.__galleryObserver) {
+					host.__galleryObserver.disconnect();
+				}
+				host.__galleryObserver = new ResizeObserver(measure);
+				host.__galleryObserver.observe(scroller);
+				measure();
+				""", scroller.getElement(), gallery.getElement());
+	}
+
+	@ClientCallable
+	public void updatePageSize(int columns, int rows) {
+		if (getUI().isEmpty()) {
+			return;
+		}
+		var newPageSize = Math.max(1, Math.min(columns * rows, 1000));
+		if (newPageSize == pageSize) {
+			return;
+		}
+		pageSize = newPageSize;
+		gotoPage(pageIndex);
 	}
 
 	private void renderGallery(String filterValue) {
@@ -194,8 +255,8 @@ public class LucideIconGallery extends VerticalLayout {
 	private void renderPage() {
 		gallery.removeAll();
 		icons.clear();
-		var start = pageIndex * ICONS_PER_PAGE;
-		var end = Math.min(start + ICONS_PER_PAGE, filteredIcons.size());
+		var start = pageIndex * pageSize;
+		var end = Math.min(start + pageSize, filteredIcons.size());
 		for (int i = start; i < end; i++) {
 			var lucideIcon = filteredIcons.get(i);
 			var icon = createIcon(lucideIcon);
@@ -225,7 +286,7 @@ public class LucideIconGallery extends VerticalLayout {
 	}
 
 	private int pageCount() {
-		return Math.max(1, (int) Math.ceil(filteredIcons.size() / (double) ICONS_PER_PAGE));
+		return Math.max(1, (int) Math.ceil(filteredIcons.size() / (double) pageSize));
 	}
 
 	private Button createPageButton(LucideIcon lucideIcon, String label, Command action) {
@@ -245,6 +306,13 @@ public class LucideIconGallery extends VerticalLayout {
 
 	private void applySettings() {
 		icons.forEach(this::applySettings);
+		measurePageSize();
+	}
+
+	private void measurePageSize() {
+		if (getUI().isPresent()) {
+			getElement().executeJs("if (this.__galleryMeasure) { this.__galleryMeasure(); }");
+		}
 	}
 
 	private void applySettings(LucideSvgIcon icon) {
