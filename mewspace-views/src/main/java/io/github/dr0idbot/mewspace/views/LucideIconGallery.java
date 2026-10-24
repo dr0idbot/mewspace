@@ -173,6 +173,7 @@ public class LucideIconGallery extends VerticalLayout {
 
 		gallery.addClassName(MewSpaceCSSConstant.LUCIDE_ICON_GALLERY);
 		var scroller = new Scroller(gallery);
+		scroller.addClassName(MewSpaceCSSConstant.LUCIDE_ICON_SCROLLER);
 		scroller.setSizeFull();
 
 		renderGallery(null);
@@ -205,15 +206,19 @@ public class LucideIconGallery extends VerticalLayout {
 							return;
 						}
 						const style = getComputedStyle(gallery);
+						const scrollerStyle = getComputedStyle(scroller);
 						const rowGap = parseFloat(style.rowGap) || 0;
+						const scrollerHeight = scroller.clientHeight
+								- (parseFloat(scrollerStyle.paddingTop) || 0)
+								- (parseFloat(scrollerStyle.paddingBottom) || 0);
 						const itemRect = item.getBoundingClientRect();
-						if (itemRect.width === 0 || itemRect.height === 0 || scroller.clientHeight === 0) {
+						if (itemRect.width === 0 || itemRect.height === 0 || scrollerHeight <= 0) {
 							return;
 						}
 						const columns = Math.max(1,
 								style.gridTemplateColumns.split(' ').filter(value => value).length);
 						const rows = Math.max(1,
-								Math.floor((scroller.clientHeight + rowGap) / (itemRect.height + rowGap) + 1e-6));
+								Math.floor((scrollerHeight + rowGap) / (itemRect.height + rowGap) + 1e-6));
 						host.$server.updatePageSize(columns, rows);
 					}, 100);
 				};

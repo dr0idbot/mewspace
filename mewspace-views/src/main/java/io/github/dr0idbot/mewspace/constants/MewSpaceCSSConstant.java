@@ -7,6 +7,7 @@ public final class MewSpaceCSSConstant {
     public static final String APP_FOOTER = "app-footer";
     public static final String LUCIDE_ICON_GALLERY = "lucide-icon-gallery";
     public static final String LUCIDE_ICON_ITEM = "lucide-icon-item";
+    public static final String LUCIDE_ICON_SCROLLER = "lucide-icon-scroller";
     public static final String LUCIDE_PAGINATION_LABEL = "lucide-pagination-label";
 
     private MewSpaceCSSConstant() {

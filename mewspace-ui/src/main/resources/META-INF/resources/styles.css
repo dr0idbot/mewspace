@@ -26,9 +26,15 @@ html {
     font-size: var(--vaadin-font-size-xs, 0.75em);
 }
 
+.lucide-icon-scroller {
+    border: 1px solid var(--vaadin-border-color-secondary);
+    border-radius: var(--vaadin-radius-l);
+    padding: var(--vaadin-padding-s);
+}
+
 .lucide-icon-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(4.8em, 1fr));
     gap: var(--vaadin-gap-m);
     width: 100%;
     min-height: 100%;
