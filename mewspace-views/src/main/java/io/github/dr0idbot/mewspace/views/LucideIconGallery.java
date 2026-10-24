@@ -27,15 +27,17 @@ import io.github.dr0idbot.vlucide.LucideSvgIcon;
 
 @Route("lucide-icons")
 @PageTitle(MewSpaceViewsConstant.LUCIDE_ICONS_TITLE)
-@Menu(title = MewSpaceViewsConstant.LUCIDE_ICONS_TITLE, order = 2, icon = "lucide/gallery.svg")
+@Menu(title = MewSpaceViewsConstant.LUCIDE_ICONS_TITLE, order = 2, icon = "lucide/playing-cards-fan.svg")
 public class LucideIconGallery extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
 
 	private static final String COLOR_DEFAULT = "Default";
-	private static final double DEFAULT_FONT_SIZE = 40.0;
-	private static final double DEFAULT_STROKE_WIDTH = 1.0;
-	private static final int ICONS_PER_PAGE = 120;
+
+	private static final double DEFAULT_FONT_SIZE = 60.0;
+	private static final double DEFAULT_STROKE_WIDTH = 1.5;
+
+	private static final int ICONS_PER_PAGE = 160;
 
 	private static final List<Double> STROKE_WIDTHS = List.of(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0);
 	private static final List<String> LINE_CAP_CHOICES = List.of(COLOR_DEFAULT, "butt", "round", "square");
@@ -136,8 +138,27 @@ public class LucideIconGallery extends VerticalLayout {
 		var filter = new TextField(MewSpaceViewsConstant.LABEL_FILTER);
 		filter.addValueChangeListener(e -> renderGallery(e.getValue()));
 
+		var resetButton = new Button(MewSpaceViewsConstant.LABEL_RESET, e -> {
+			fontSize = DEFAULT_FONT_SIZE;
+			strokeWidth = DEFAULT_STROKE_WIDTH;
+			color = COLOR_DEFAULT;
+			fillColor = DEFAULT_FILL_LABEL;
+			lineCap = COLOR_DEFAULT;
+			lineJoin = COLOR_DEFAULT;
+
+			fontSizeField.setValue(String.valueOf((long) DEFAULT_FONT_SIZE));
+			strokeWidthComboBox.setValue(DEFAULT_STROKE_WIDTH);
+			colorComboBox.setValue(COLOR_DEFAULT);
+			fillComboBox.setValue(DEFAULT_FILL_LABEL);
+			lineCapComboBox.setValue(COLOR_DEFAULT);
+			lineJoinComboBox.setValue(COLOR_DEFAULT);
+			filter.setValue("");
+
+			applySettings();
+		});
+
 		var controls = new HorizontalLayout(fontSizeField, strokeWidthComboBox, colorComboBox, fillComboBox,
-				lineCapComboBox, lineJoinComboBox, filter);
+				lineCapComboBox, lineJoinComboBox, filter, resetButton);
 		controls.setAlignItems(Alignment.END);
 
 		var pagination = new HorizontalLayout(firstButton, previousButton, pageLabel, nextButton, lastButton,
@@ -194,7 +215,7 @@ public class LucideIconGallery extends VerticalLayout {
 
 	private void updatePagination() {
 		pageLabel.setText(MewSpaceViewsConstant.PAGE_OF.formatted(pageIndex + 1, pageCount()));
-		countLabel.setText(MewSpaceViewsConstant.ICONS_COUNT.formatted(filteredIcons.size()));
+		countLabel.setText(MewSpaceViewsConstant.TOTAL_ICONS.formatted(filteredIcons.size()));
 		var hasPrevious = pageIndex > 0;
 		var hasNext = pageIndex < pageCount() - 1;
 		firstButton.setEnabled(hasPrevious);

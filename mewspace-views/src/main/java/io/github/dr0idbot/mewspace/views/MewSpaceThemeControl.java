@@ -28,7 +28,7 @@ public class MewSpaceThemeControl extends Div {
 	private static final String THEME_BASE = "Base";
 	private static final String THEME_LUMO = "Lumo";
 	private static final String THEME_AURA = "Aura";
-	private static final String SOURCE_URL = "https://github.com";
+	private static final String SOURCE_URL = "https://github.com/dr0idbot/mewspace";
 
 	private Registration styleSheetRegistration;
 	private boolean defaultsApplied;
@@ -62,8 +62,8 @@ public class MewSpaceThemeControl extends Div {
 		defaultsApplied = true;
 		UI ui = attachEvent.getUI();
 		styleSheetRegistration = ui.getPage().addStyleSheet(Aura.STYLESHEET);
-		ui.getPage().setColorScheme(Value.DARK);
-		log.info("{}Default theme {} with dark color scheme applied", LOG_PREFIX, THEME_AURA);
+		ui.getPage().setColorScheme(Value.LIGHT);
+		log.info("{}Default theme {} with light color scheme applied", LOG_PREFIX, THEME_AURA);
 	}
 
 	private void applyTheme(MenuItem themeItem, UI ui, String themeName) {
