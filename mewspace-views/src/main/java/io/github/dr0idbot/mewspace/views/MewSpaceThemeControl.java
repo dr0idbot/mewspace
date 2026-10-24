@@ -40,7 +40,6 @@ public class MewSpaceThemeControl extends Div {
 		colorSchemeItem.addClickListener(e -> eventColorSchemeChange(e.getSource()));
 
 		MenuItem themeItem = menuBar.addItem(THEME_AURA);
-		themeItem.addClickListener(e -> applyTheme(themeItem, e.getUI(), THEME_AURA));
 
 		SubMenu themeSubMenu = themeItem.getSubMenu();
 		themeSubMenu.addItem(THEME_LUMO, e -> applyTheme(themeItem, e.getUI(), THEME_LUMO));

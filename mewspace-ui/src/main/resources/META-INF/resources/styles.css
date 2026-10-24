@@ -25,3 +25,26 @@ html {
     font-family: monospace;
     font-size: var(--vaadin-font-size-xs, 0.75em);
 }
+
+.lucide-icon-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
+    gap: var(--vaadin-gap-m);
+    width: 100%;
+}
+
+.lucide-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--vaadin-gap-s);
+    padding: var(--vaadin-padding-s);
+    min-width: 0;
+    border: 1px solid var(--vaadin-border-color-secondary);
+    border-radius: var(--vaadin-radius-s);
+}
+
+.lucide-pagination-label {
+    min-width: 7em;
+    text-align: center;
+}

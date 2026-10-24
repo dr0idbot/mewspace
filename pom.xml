@@ -23,10 +23,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<vaadin.version>25.2.8</vaadin.version>
+		<vaadin.version>25.3.2</vaadin.version>
 		<spring-boot.version>4.1.1</spring-boot.version>
 
-		<v-lucide-icons.version>1.41.0</v-lucide-icons.version>
+		<v-lucide-icons.version>1.60.0</v-lucide-icons.version>
 	</properties>
 
 	<dependencyManagement>

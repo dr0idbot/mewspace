@@ -20,7 +20,7 @@ import com.vaadin.flow.server.Version;
 import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 
-import io.github.dr0idbot.mewspace.constants.MewSpaceCSSConst;
+import io.github.dr0idbot.mewspace.constants.MewSpaceCSSConstant;
 
 @Layout
 public final class MewSpaceLayout extends AppLayout {
@@ -34,11 +34,11 @@ public final class MewSpaceLayout extends AppLayout {
 
 	private Component createApplicationHeader() {
 		var appLogo = new Avatar("MewSpace");
-		appLogo.addClassName(MewSpaceCSSConst.APP_LOGO);
+		appLogo.addClassName(MewSpaceCSSConstant.APP_LOGO);
 		appLogo.addThemeVariants(AvatarVariant.XSMALL);
 
 		var appName = new Span("MewSpace");
-		appName.addClassName(MewSpaceCSSConst.APP_NAME);
+		appName.addClassName(MewSpaceCSSConstant.APP_NAME);
 
 		var header = new HorizontalLayout(appLogo, appName);
 		header.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -57,7 +57,7 @@ public final class MewSpaceLayout extends AppLayout {
 
 		var footer = new VerticalLayout(themeControl, new Span("Vaadin - v" + Version.getFullVersion()));
 		footer.setAlignItems(FlexComponent.Alignment.CENTER);
-		footer.addClassName(MewSpaceCSSConst.APP_FOOTER);
+		footer.addClassName(MewSpaceCSSConstant.APP_FOOTER);
 		return footer;
 	}
 

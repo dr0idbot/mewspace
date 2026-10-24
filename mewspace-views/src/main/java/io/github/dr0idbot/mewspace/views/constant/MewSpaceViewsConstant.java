@@ -26,6 +26,20 @@ public final class MewSpaceViewsConstant {
 	public static final String CURRENCIES = "Currencies";
 	public static final String LANGUAGES = "Languages";
 	public static final String COUNTRIES = "Countries";
+	public static final String LUCIDE_ICONS_TITLE = "Lucide Icons";
+	public static final String LABEL_FONT_SIZE = "Font size";
+	public static final String LABEL_STROKE_WIDTH = "Stroke width";
+	public static final String LABEL_COLOR = "Color";
+	public static final String LABEL_FILL_COLOR = "Fill color";
+	public static final String LABEL_LINE_CAP = "Stroke line cap";
+	public static final String LABEL_LINE_JOIN = "Stroke line join";
+	public static final String LABEL_FILTER = "Filter";
+	public static final String PAGE_OF = "Page %d of %d";
+	public static final String ICONS_COUNT = "%d icons";
+	public static final String PAGE_FIRST = "First page";
+	public static final String PAGE_PREVIOUS = "Previous page";
+	public static final String PAGE_NEXT = "Next page";
+	public static final String PAGE_LAST = "Last page";
 
 	private MewSpaceViewsConstant() {
 		//
