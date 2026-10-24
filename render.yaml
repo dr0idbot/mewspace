@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mewspace-ui
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./
+    branch: main
+    healthCheckPath: /
+    plan: free
+    autoDeploy: true

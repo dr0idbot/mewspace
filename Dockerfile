@@ -26,5 +26,5 @@ COPY --from=build --chown=ubuntu:ubuntu /build/mewspace-ui/target/mewspace-ui-1.
 USER ubuntu
 EXPOSE 8080
 # PORT is injected by Render; the jar binds ${PORT:8080}.
-# Heap sized off the container limit (Render free tier: 512MB).
-ENTRYPOINT ["java", "-XX:MaxRAMPercentage=80.0", "-XX:+ExitOnOutOfMemoryError", "-jar", "/app/app.jar"]
+# Sized for the free tier (0.1 CPU / 512MB): single CPU, low-overhead GC.
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=80.0", "-XX:ActiveProcessorCount=1", "-XX:+UseSerialGC", "-XX:+ExitOnOutOfMemoryError", "-jar", "/app/app.jar"]

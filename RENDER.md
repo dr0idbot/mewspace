@@ -12,8 +12,9 @@ JRE-only runtime image:
   Vaadin **production** frontend bundle (the `build-frontend` goal runs during `package`),
   so the runtime image never needs Maven/Node.
 - Runtime stage: `eclipse-temurin:25-jre-noble`, non-root `ubuntu` user, exposes port 8080,
-  and runs with `MaxRAMPercentage=80` + `ExitOnOutOfMemoryError` (OOMs exit so Render
-  restarts the container).
+  and runs with `MaxRAMPercentage=80`, `ActiveProcessorCount=1`, `UseSerialGC` and
+  `ExitOnOutOfMemoryError` (tuned for the free tier; OOMs exit so Render restarts the
+  container).
 
 The app binds `${PORT:8080}` (Render injects `PORT`), and
 `server.forward-headers-strategy=native` is set so HTTPS/TLS is honored behind Render's
@@ -31,7 +32,10 @@ edge proxy (correct `https://` URLs and working push/websockets).
 6. Health check path: `/` (the Vaadin root route).
 7. Auto-deploy: on push to selected branch.
 
-## render.yaml alternative
+## render.yaml
+
+The repo root ships a [`render.yaml`](render.yaml) blueprint with the settings below; point
+Render at it (New → Blueprint) or use it as a reference for a manual Web Service.
 
 ```yaml
 services:
@@ -61,7 +65,7 @@ docker run --rm -p 8080:8080 mewspace-ui     # or -e PORT=10000 -p 10000:10000
 ## Gotchas
 
 - First build takes ~5–10 min (Maven downloads + npm + frontend compile). Rebuilds with
-  unchanged POMs reuse the dependency layers.
+  unchanged POMs reuse the dependency layers. The final image is ~495MB.
 - `.dockerignore` keeps `target/`, generated frontend/bundle dirs and local docs out of
   the build context.
 - The countries.dev API is called server-side, so no CORS set-up is needed.
