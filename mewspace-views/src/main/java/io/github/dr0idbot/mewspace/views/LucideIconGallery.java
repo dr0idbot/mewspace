@@ -213,7 +213,7 @@ public class LucideIconGallery extends VerticalLayout {
 						const columns = Math.max(1,
 								style.gridTemplateColumns.split(' ').filter(value => value).length);
 						const rows = Math.max(1,
-								Math.floor((scroller.clientHeight + rowGap - 1) / (itemRect.height + rowGap)));
+								Math.floor((scroller.clientHeight + rowGap) / (itemRect.height + rowGap) + 1e-6));
 						host.$server.updatePageSize(columns, rows);
 					}, 100);
 				};
