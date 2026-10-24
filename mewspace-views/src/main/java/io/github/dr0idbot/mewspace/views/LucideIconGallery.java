@@ -205,14 +205,13 @@ public class LucideIconGallery extends VerticalLayout {
 							return;
 						}
 						const style = getComputedStyle(gallery);
-						const columnGap = parseFloat(style.columnGap) || 0;
 						const rowGap = parseFloat(style.rowGap) || 0;
 						const itemRect = item.getBoundingClientRect();
 						if (itemRect.width === 0 || itemRect.height === 0 || scroller.clientHeight === 0) {
 							return;
 						}
 						const columns = Math.max(1,
-								Math.floor((gallery.clientWidth + columnGap) / (itemRect.width + columnGap)));
+								style.gridTemplateColumns.split(' ').filter(value => value).length);
 						const rows = Math.max(1,
 								Math.floor((scroller.clientHeight + rowGap - 1) / (itemRect.height + rowGap)));
 						host.$server.updatePageSize(columns, rows);
